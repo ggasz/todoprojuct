@@ -3,6 +3,7 @@ var app = express()
 var cors = require('cors')
 var logger = require('morgan')
 var mongoose = require('mongoose')
+var routes = require('./src/routes')
 
 // var corsOptions={
 //     origin: 'http://localhost:300',
@@ -17,8 +18,10 @@ const CONNECT_URL = 'mongodb://localhost:27017/mydbname'
   .catch(e => console.log(`failed to connect mongodb: ${e}`))
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json()) //요청본문 파싱(request body 파싱)
 app.use(logger('tiny')) // Logger 설정
+
+app.use('/api',routes)
 
 app.get('/hello',(req, res)=>{
     res.send('hello world!')
