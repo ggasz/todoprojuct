@@ -5,19 +5,20 @@ var logger = require('morgan')
 var mongoose = require('mongoose')
 var routes = require('./src/routes')
 
-// var corsOptions={
-//     origin: 'http://localhost:300',
-//     creadentials: true
-// }
+var corsOptions={
+    origin: '*',
+    creadentials: true
+}
 
-const CONNECT_URL = 'mongodb://localhost:27017/mydbname'
+const CONNECT_URL = 'mongodb://localhost:27017/kor_dic_db'
  mongoose.connect(CONNECT_URL, { // Mongo DB 서버 연결 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 }).then(() => console.log("mongodb connected ...")) 
   .catch(e => console.log(`failed to connect mongodb: ${e}`))
 
-app.use(cors())
+app.use(cors(corsOptions))
+// app.use(ex)
 app.use(express.json()) //요청본문 파싱(request body 파싱)
 app.use(logger('tiny')) // Logger 설정
 
